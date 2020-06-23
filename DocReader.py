@@ -5,7 +5,7 @@ import time
 from transformers import MarianMTModel, MarianTokenizer
 from docx import Document
 
-UPLOAD_FOLDER_TRANSLATED = 'C:/Users/shipant/PycharmProjects/NLP_LanguageTranslation/FileStorage_Translated'
+UPLOAD_FOLDER_TRANSLATED = 'FileStorage_Translated'
 
 
 def translat(src_text):
