@@ -6,6 +6,9 @@ WORKDIR /app
 COPY requirements.txt /app
 RUN pip install -r requirements.txt
 
+RUN mkdir -p /app/FileStorage_Input
+RUN mkdir -p /app/FileStorage_Translated
+
 COPY . /app
 
 CMD python app.py
