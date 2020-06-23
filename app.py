@@ -3,14 +3,14 @@ import os
 import atexit
 import glob
 
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, send_file
 from translate import Translator
 import DocReader
 
 from config import *
 
-UPLOAD_FOLDER_TRANSLATED = 'C:/Users/shipant/PycharmProjects/NLP_LanguageTranslation/FileStorage_Translated'
-UPLOAD_FOLDER_INPUT = 'C:/Users/shipant/PycharmProjects/NLP_LanguageTranslation/FileStorage_Input'
+UPLOAD_FOLDER_TRANSLATED = 'FileStorage_Translated'
+UPLOAD_FOLDER_INPUT = 'FileStorage_Input'
 
 ALLOWED_EXTENSIONS = {'docx'}
 
@@ -78,7 +78,7 @@ def get_DocxTranslated():
     if file and allowed_file(file.filename):
         filename = file.filename
 
-        # Save the file in local storage
+        #Save the file in local storage
         filepath = os.path.join(app.config['UPLOAD_FOLDER_INPUT'], filename).replace("\\", "/")
         file.save(os.path.join(filepath))
 
@@ -91,6 +91,7 @@ def get_DocxTranslated():
         response.headers['Content-Disposition'] = 'attachment; filename = "Translation.docx"'
         response.data = file_data
         return response
+
 
     else:
         return jsonify({"status": "Failed"})
