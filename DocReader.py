@@ -1,4 +1,5 @@
 import os
+import re
 import uuid
 import time
 
@@ -9,9 +10,11 @@ UPLOAD_FOLDER_TRANSLATED = 'FileStorage_Translated'
 
 
 def translat(src_text):
+    print("\t " + "INPUT ::: " + str(src_text))
     time1 = time.time()
     translated = model.generate(**tokenizer.prepare_translation_batch(src_text))
     tgt_text = [tokenizer.decode(t, skip_special_tokens=True) for t in translated]
+    print("\t " + "OUTPUT ::: " + str(tgt_text))
     time2 = time.time()
     duration = (time2 - time1) * 1000.0
     return tgt_text, duration
@@ -38,7 +41,7 @@ def translateDocx(source, target, file):
         for i in range(len(inline)):
             text = inline[i].text
             textsL = [text]
-            textsL = list(filter(None, textsL))
+            textsL = filter(lambda x: not re.match(r'^\s*$', x), textsL)
             for text_value in textsL:
                 textElem = [text_value]
                 translationList, duration = translat(textElem)
