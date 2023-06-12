@@ -5,4 +5,4 @@ tensorflow==2.2.0
 tokenizers==0.7.0
 torch==1.5.0
 torchvision==0.6.0
-transformers==2.11.0
+transformers==4.30.0
